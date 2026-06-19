@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://opwago.github.io/maiyouxi-com-cn-3/sitemap.xml
