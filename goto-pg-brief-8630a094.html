@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>PG模拟器 · 站点介绍</title>
+    <style>
+        /* 重置与全局 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f2f4f7;
+            color: #1e232b;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-container {
+            max-width: 960px;
+            width: 100%;
+        }
+
+        /* 柔和阴影统一变量 */
+        :root {
+            --card-bg: #ffffff;
+            --border-light: 1px solid #e4e8ee;
+            --shadow-soft: 0 6px 14px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+            --radius-card: 14px;
+            --accent: #3b6c9e;
+            --accent-light: #e7eef8;
+            --text-secondary: #4d5668;
+            --text-muted: #6d7687;
+        }
+
+        /* 卡片通用 */
+        .card {
+            background: var(--card-bg);
+            border: var(--border-light);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-soft);
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* 标题体系 */
+        h1 {
+            font-size: 2rem;
+            font-weight: 580;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+            color: #151a23;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 540;
+            margin-bottom: 1rem;
+            color: #1f2a36;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            font-weight: 520;
+            margin-bottom: 0.4rem;
+            color: #1f2937;
+        }
+
+        p {
+            margin-bottom: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* 按钮风格的链接（但仅用于非强制，保持克制） */
+        .link-button {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-weight: 500;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #d2def0;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+            border-bottom: none;
+        }
+
+        .link-button:hover {
+            background: #d5e2f5;
+            border-color: #b1c8e5;
+        }
+
+        /* 网格布局（用于特点） */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .feature-item {
+            background: #f9fafc;
+            border: 1px solid #e9edf4;
+            border-radius: 12px;
+            padding: 1.1rem 1.2rem;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* 定义列表 (FAQ 摘要) */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .faq-entry {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #e2e7f0;
+        }
+
+        .faq-entry:last-child {
+            border-bottom: none;
+        }
+
+        .faq-entry dt {
+            font-weight: 530;
+            color: #1f2937;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-entry dd {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-left: 0;
+        }
+
+        /* 小字 / 辅助 */
+        .footnote {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid #e2e7f0;
+            padding-top: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .text-sm {
+            font-size: 0.92rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2f8;
+            padding: 0.1rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #3d5670;
+            margin-right: 0.3rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 1rem;
+            }
+            .card {
+                padding: 1.3rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .link-button {
+                font-size: 0.9rem;
+                padding: 0.35rem 1rem;
+            }
+        }
+
+        /* 简单 hero */
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+            margin-bottom: 1.8rem;
+            font-weight: 380;
+        }
+
+        .inline-highlight {
+            background: #edf2fa;
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            color: #1f3750;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <!-- hero 区块：站点摘要 -->
+    <div class="card" style="padding-bottom: 1.6rem;">
+        <h1>关于 <span style="font-weight: 580;">goto-pg.com</span></h1>
+        <div class="hero-sub">面向实用场景的 PG模拟器 · 从原理到交互的轻量化工具</div>
+        <p>
+            <strong>PG模拟器</strong> 并非一个娱乐化模拟平台，而是一套面向数据库开发与教学场景的交互式环境。
+            本站以 PostgreSQL 行为为参照，提供可在线执行的 SQL 模拟层，帮助使用者快速验证查询逻辑、
+            理解隔离级别与执行计划的基础概念，而无需在本地搭建完整数据库实例。
+        </p>
+    </div>
+
+    <!-- 核心亮点 / 特点 -->
+    <div class="card">
+        <h2>设计特点与实用边界</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>⚙️ 行为模拟</h3>
+                <p>支持常见 DML、事务控制、窗口函数及部分系统函数。模拟器尽力贴近真实 PG 语法容错与类型系统，但仍存在差异。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🧪 轻量交互</h3>
+                <p>无需注册，打开即用。适用于快速原型、教学演示、或面试前语法回忆。不存储用户数据，会话状态临时保留。</p>
+            </div>
+            <div class="feature-item">
+                <h3>📘 文档与示例</h3>
+                <p>内置常用示例数据集与查询模板，降低上手成本。也适合作为 PostgreSQL 入门时的辅助练习环境。</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔒 边界说明</h3>
+                <p>模拟层不连接真实数据库，不支持持久化、存储过程、复杂扩展。高并发场景下响应可能变慢，建议用于探索性查询。</p>
+            </div>
+        </div>
+        <p class="text-sm" style="margin-top: 0.9rem; color: var(--text-muted);">
+            * 模拟器并非真实 PG 实例，结果可能因版本或实现细节产生偏差。关键业务验证请以官方文档为准。
+        </p>
+    </div>
+
+    <!-- 使用建议 + 可信说明 -->
+    <div class="card">
+        <h2>使用场景与可信说明</h2>
+        <p>
+            本站由独立开发者维护，并非 PostgreSQL 官方工具。代码开源，无第三方跟踪脚本，不收集个人标识信息。
+            建议在以下场景中使用 <a href="https://goto-pg.com">PG模拟器</a>：
+        </p>
+        <ul style="padding-left: 1.5rem; margin-bottom: 0.8rem; color: var(--text-secondary);">
+            <li>快速测试 SQL 片段的语法与语义逻辑（如 JOIN、子查询、CTE）。</li>
+            <li>教学环境中演示基础的查询计划与索引效果（模拟层提供简化 explain）。</li>
+            <li>在无法安装本地数据库的设备上（如平板、受限网络）进行轻量练习。</li>
+        </ul>
+        <p>
+            需要提醒的是，模拟层对某些高级特性（如递归 CTE 深度、锁机制、GIS 函数）仅作有限支持。
+            若需要进行性能测试或生产环境验证，请直接使用本地 PostgreSQL 实例。站内不提供任何形式的“破解”“注入”或“绕过”功能。
+        </p>
+        <div style="margin-top: 0.6rem;">
+            <span class="tag">SQL 学习</span>
+            <span class="tag">查询验证</span>
+            <span class="tag">教学工具</span>
+            <span class="tag">轻量模拟</span>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要（克制问答） -->
+    <div class="card">
+        <h2>常见疑问摘要</h2>
+        <dl class="faq-list">
+            <div class="faq-entry">
+                <dt>模拟器支持所有 PostgreSQL 数据类型吗？</dt>
+                <dd>支持大部分常用类型（数值、文本、时间、JSON、数组等）。部分自定义类型与域类型暂不包含。</dd>
+            </div>
+            <div class="faq-entry">
+                <dt>我的查询会被记录或分享吗？</dt>
+                <dd>不会。所有查询在会话结束后清除。站点不设日志后端，亦不存储任何可回溯的查询文本。</dd>
+            </div>
+            <div class="faq-entry">
+                <dt>和官方 psql 相比有哪些主要限制？</dt>
+                <dd>无连接池、无角色权限校验、无 pg_stat 统计信息、不保留 MVCC 可见性细节。请将其视为“语法兼容的沙箱”。</dd>
+            </div>
+            <div class="faq-entry">
+                <dt>有没有离线版本或 API？</dt>
+                <dd>目前仅提供在线页面方式。项目暂不提供自部署镜像或 REST API。开发者可根据开源仓库自行构建。</dd>
+            </div>
+        </dl>
+    </div>
+
+    <!-- 链接嵌入句子 + 页脚 -->
+    <div class="card" style="padding-top: 1.2rem; padding-bottom: 1.2rem;">
+        <p style="margin-bottom: 0.6rem;">
+            如果你正在寻找一个轻量、专注的 SQL 实验环境，不妨试试 
+            <a href="https://goto-pg.com">PG模拟器</a>。它不替代真实数据库，却能在很多场景下节省你搭建环境的时间。
+        </p>
+        <p class="text-sm" style="color: var(--text-muted);">
+            本站基于 MIT 许可证开源 · 仅提供技术参考 · 不涉及任何加密货币、赌博、刷量或违规内容。
+        </p>
+        <div class="footnote">
+            <span>创作种子记号 · 页面方向：产品说明式 · 浅灰背景卡片布局</span>
+            <span style="float: right; opacity: 0.6;">goto-pg.com · 2025</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
